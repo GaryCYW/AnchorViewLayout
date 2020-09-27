@@ -8,25 +8,126 @@
 
 
     <com.llpine.anchorviewinno.view.AnchorPopupLayout
-        android:layout_width="120dp"
-        android:layout_height="200dp"
-        app:anchor_direction="LEFT"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        app:anchor_direction="DOWN"
         app:anchor_height="@dimen/popup_layout_anchor_height"
         app:anchor_offset="0dp"
         app:anchor_offset_percentage="0.5"
         app:anchor_width="@dimen/popup_layout_anchor_width"
-        app:corner_path_effect="true"
+        app:corner_path_effect="false"
+        app:cubic_anchor="true"
         app:layout_color="#FF6FCB"
         app:layout_corner="@dimen/popup_notify_coins_corner"
         app:layout_gradient_color="#FF547B"
         app:layout_gradient_direction="RIGHT"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="17dp"
+            android:layout_marginVertical="5dp"
+            android:text="Hello world!"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.llpine.anchorviewinno.view.AnchorPopupLayout>
+
+    <com.llpine.anchorviewinno.view.AnchorPopupLayout
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        app:anchor_direction="UP"
+        app:anchor_height="@dimen/popup_layout_anchor_height"
+        app:anchor_offset="0dp"
+        app:anchor_offset_percentage="0.5"
+        app:anchor_width="@dimen/popup_layout_anchor_width"
+        app:corner_path_effect="false"
+        app:cubic_anchor="true"
+        app:layout_color="#FF6FCB"
+        app:layout_corner="@dimen/popup_notify_coins_corner"
+        app:layout_gradient_color="#FF547B"
+        app:layout_gradient_direction="RIGHT"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
-            android:id="@+id/tv_get_more"
+            android:id="@+id/tv_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="17dp"
+            android:layout_marginVertical="5dp"
+            android:text="Hello world!"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.llpine.anchorviewinno.view.AnchorPopupLayout>
+
+    <com.llpine.anchorviewinno.view.AnchorPopupLayout
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        app:anchor_direction="LEFT"
+        app:anchor_height="@dimen/popup_layout_anchor_height"
+        app:anchor_offset="0dp"
+        app:anchor_offset_percentage="0.5"
+        app:anchor_width="@dimen/popup_layout_anchor_width"
+        app:corner_path_effect="false"
+        app:cubic_anchor="true"
+        app:layout_color="#FF6FCB"
+        app:layout_corner="@dimen/popup_notify_coins_corner"
+        app:layout_gradient_color="#FF547B"
+        app:layout_gradient_direction="RIGHT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="17dp"
+            android:layout_marginVertical="5dp"
+            android:text="Hello world!"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.llpine.anchorviewinno.view.AnchorPopupLayout>
+
+    <com.llpine.anchorviewinno.view.AnchorPopupLayout
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        app:anchor_direction="RIGHT"
+        app:anchor_height="@dimen/popup_layout_anchor_height"
+        app:anchor_offset="0dp"
+        app:anchor_offset_percentage="0.5"
+        app:anchor_width="@dimen/popup_layout_anchor_width"
+        app:corner_path_effect="false"
+        app:cubic_anchor="true"
+        app:layout_color="#FF6FCB"
+        app:layout_corner="@dimen/popup_notify_coins_corner"
+        app:layout_gradient_color="#FF547B"
+        app:layout_gradient_direction="RIGHT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="17dp"

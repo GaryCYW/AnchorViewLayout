@@ -33,6 +33,7 @@ open class AnchorPopupLayout @JvmOverloads constructor(context: Context, attrs: 
     private val mLayoutColorList = mutableListOf<Int>()
     private var mGradientDirection = GradientDirection.RIGHT
     private val bgPath = Path()
+    private var mCubicAnchor = false
 
     interface OnLayoutListener {
         fun onSizeChanged(w: Int, h: Int)
@@ -59,6 +60,9 @@ open class AnchorPopupLayout @JvmOverloads constructor(context: Context, attrs: 
 
             val cornerPathEffect = ta.getBoolean(R.styleable.AnchorPopupLayout_corner_path_effect, false)
             setEnableCornerPathEffect(cornerPathEffect, false)
+
+            val cubicAnchor = ta.getBoolean(R.styleable.AnchorPopupLayout_cubic_anchor, false)
+            setEnableCubicAnchor(cubicAnchor, false)
 
             val corner = ta.getDimension(R.styleable.AnchorPopupLayout_layout_corner, resources.getDimension(R.dimen.popup_layout_corner))
             setLayoutCorner(corner, false)
@@ -192,6 +196,16 @@ open class AnchorPopupLayout @JvmOverloads constructor(context: Context, attrs: 
         }
     }
 
+    fun setEnableCubicAnchor(enable: Boolean, invalidate: Boolean = true) {
+        if (mCubicAnchor != enable) {
+            mCubicAnchor = enable
+
+            if (invalidate) {
+                invalidate()
+            }
+        }
+    }
+
     private fun setupPadding() {
         when (mAnchorDirection) {
             AnchorDirection.DOWN -> setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom + mAnchorHeight.toInt())
@@ -225,8 +239,16 @@ open class AnchorPopupLayout @JvmOverloads constructor(context: Context, attrs: 
                 bgPath.lineTo(width.toFloat(), height.toFloat() - corner - mAnchorHeight)
                 bgPath.arcTo(width.toFloat() - corner, height.toFloat() - corner - mAnchorHeight, width.toFloat(), height.toFloat() - mAnchorHeight, 0f, 90f, false)
                 bgPath.lineTo(anchorOffset + mAnchorWidth / 2, height.toFloat() - mAnchorHeight)
-                bgPath.lineTo(anchorOffset, height.toFloat())
-                bgPath.lineTo(anchorOffset - mAnchorWidth / 2, height.toFloat() - mAnchorHeight)
+
+                // draw anchor
+                if (mCubicAnchor) {
+                    bgPath.cubicTo(anchorOffset + mAnchorWidth / 4, height.toFloat() - mAnchorHeight, anchorOffset + mAnchorWidth / 8, height.toFloat(), anchorOffset, height.toFloat())
+                    bgPath.cubicTo(anchorOffset - mAnchorWidth / 8, height.toFloat(), anchorOffset - mAnchorWidth / 4, height.toFloat() - mAnchorHeight, anchorOffset - mAnchorWidth / 2, height.toFloat() - mAnchorHeight)
+                } else {
+                    bgPath.lineTo(anchorOffset, height.toFloat())
+                    bgPath.lineTo(anchorOffset - mAnchorWidth / 2, height.toFloat() - mAnchorHeight)
+                }
+
                 bgPath.lineTo(0f + corner, height.toFloat() - mAnchorHeight)
                 bgPath.arcTo(0f, height.toFloat() - corner - mAnchorHeight, 0f + corner, height.toFloat() - mAnchorHeight, 90f, 90f, false)
                 bgPath.close()
@@ -235,8 +257,16 @@ open class AnchorPopupLayout @JvmOverloads constructor(context: Context, attrs: 
                 bgPath.moveTo(0f, 0f + corner + mAnchorHeight)
                 bgPath.arcTo(0f, mAnchorHeight, 0f + corner, 0f + corner + mAnchorHeight, 180f, 90f, false)
                 bgPath.lineTo(anchorOffset - mAnchorWidth / 2, mAnchorHeight)
-                bgPath.lineTo(anchorOffset, 0f)
-                bgPath.lineTo(anchorOffset + mAnchorWidth / 2, mAnchorHeight)
+
+                // draw anchor
+                if (mCubicAnchor) {
+                    bgPath.cubicTo(anchorOffset - mAnchorWidth / 4, mAnchorHeight, anchorOffset - mAnchorWidth / 8, 0f, anchorOffset, 0f)
+                    bgPath.cubicTo(anchorOffset + mAnchorWidth / 8, 0f, anchorOffset + mAnchorWidth / 4, mAnchorHeight, anchorOffset + mAnchorWidth / 2, mAnchorHeight)
+                } else {
+                    bgPath.lineTo(anchorOffset, 0f)
+                    bgPath.lineTo(anchorOffset + mAnchorWidth / 2, mAnchorHeight)
+                }
+
                 bgPath.lineTo(width.toFloat() - corner, mAnchorHeight)
                 bgPath.arcTo(width.toFloat() - corner, mAnchorHeight, width.toFloat(), mAnchorHeight + corner, 270f, 90f, false)
                 bgPath.lineTo(width.toFloat(), height.toFloat() - corner)
@@ -255,8 +285,16 @@ open class AnchorPopupLayout @JvmOverloads constructor(context: Context, attrs: 
                 bgPath.lineTo(0f + corner + mAnchorHeight, height.toFloat())
                 bgPath.arcTo(0f + mAnchorHeight, height.toFloat() - corner, 0f + corner + mAnchorHeight, height.toFloat(), 90f, 90f, false)
                 bgPath.lineTo(0f + mAnchorHeight, anchorOffset + mAnchorWidth / 2)
-                bgPath.lineTo(0f, anchorOffset)
-                bgPath.lineTo(0f + mAnchorHeight, anchorOffset - mAnchorWidth / 2)
+
+                // draw anchor
+                if (mCubicAnchor) {
+                    bgPath.cubicTo(0f + mAnchorHeight, anchorOffset + mAnchorWidth / 4, 0f, anchorOffset + mAnchorWidth / 8, 0f, anchorOffset)
+                    bgPath.cubicTo(0f, anchorOffset - mAnchorWidth / 8, 0f + mAnchorHeight, anchorOffset - mAnchorWidth / 4, 0f + mAnchorHeight, anchorOffset - mAnchorWidth / 2)
+                } else {
+                    bgPath.lineTo(0f, anchorOffset)
+                    bgPath.lineTo(0f + mAnchorHeight, anchorOffset - mAnchorWidth / 2)
+                }
+
                 bgPath.close()
             }
             AnchorDirection.RIGHT -> {
@@ -265,8 +303,16 @@ open class AnchorPopupLayout @JvmOverloads constructor(context: Context, attrs: 
                 bgPath.lineTo(width.toFloat() - corner - mAnchorHeight, 0f)
                 bgPath.arcTo(width.toFloat() - corner - mAnchorHeight, 0f, width.toFloat() - mAnchorHeight, corner, 270f, 90f, false)
                 bgPath.lineTo(width.toFloat() - mAnchorHeight, anchorOffset - mAnchorWidth / 2)
-                bgPath.lineTo(width.toFloat(), anchorOffset)
-                bgPath.lineTo(width.toFloat() - mAnchorHeight, anchorOffset + mAnchorWidth / 2)
+
+                // draw anchor
+                if (mCubicAnchor) {
+                    bgPath.cubicTo(width.toFloat() - mAnchorHeight, anchorOffset - mAnchorWidth / 4, width.toFloat(), anchorOffset - mAnchorWidth / 8, width.toFloat(), anchorOffset)
+                    bgPath.cubicTo(width.toFloat(), anchorOffset + mAnchorWidth / 8, width.toFloat() - mAnchorHeight, anchorOffset + mAnchorWidth / 4, width.toFloat() - mAnchorHeight, anchorOffset + mAnchorWidth / 2)
+                } else {
+                    bgPath.lineTo(width.toFloat(), anchorOffset)
+                    bgPath.lineTo(width.toFloat() - mAnchorHeight, anchorOffset + mAnchorWidth / 2)
+                }
+
                 bgPath.lineTo(width.toFloat() - mAnchorHeight, height.toFloat() - corner)
                 bgPath.arcTo(width.toFloat() - mAnchorHeight - corner, height.toFloat() - corner, width.toFloat() - mAnchorHeight, height.toFloat(), 0f, 90f, false)
                 bgPath.lineTo(0f + corner, height.toFloat())
