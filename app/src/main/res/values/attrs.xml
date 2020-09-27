@@ -21,6 +21,7 @@
         </attr>
         <attr name="anchor_offset_percentage" format="float" />
         <attr name="anchor_offset" format="dimension" />
+        <attr name="corner_path_effect" format="boolean" />
     </declare-styleable>
 
 </resources>

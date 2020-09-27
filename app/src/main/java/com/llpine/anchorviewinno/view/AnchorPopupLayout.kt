@@ -57,6 +57,9 @@ open class AnchorPopupLayout @JvmOverloads constructor(context: Context, attrs: 
             setGradientDirection(gradientDirection)
             setupLayoutColor()
 
+            val cornerPathEffect = ta.getBoolean(R.styleable.AnchorPopupLayout_corner_path_effect, false)
+            setEnableCornerPathEffect(cornerPathEffect, false)
+
             val corner = ta.getDimension(R.styleable.AnchorPopupLayout_layout_corner, resources.getDimension(R.dimen.popup_layout_corner))
             setLayoutCorner(corner, false)
 
@@ -166,6 +169,26 @@ open class AnchorPopupLayout @JvmOverloads constructor(context: Context, attrs: 
         mAnchorOffset = offset
         if (invalidate) {
             setupLayoutPath()
+        }
+    }
+
+    fun setEnableCornerPathEffect(enable: Boolean, invalidate: Boolean = true) {
+        if (enable) {
+            if (mBgPaint.pathEffect !is CornerPathEffect) {
+                mBgPaint.pathEffect = CornerPathEffect(30F)
+
+                if (invalidate) {
+                    invalidate()
+                }
+            }
+        } else {
+            if (mBgPaint.pathEffect != null) {
+                mBgPaint.pathEffect = null
+
+                if (invalidate) {
+                    invalidate()
+                }
+            }
         }
     }
 

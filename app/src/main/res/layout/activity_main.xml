@@ -15,6 +15,7 @@
         app:anchor_offset="0dp"
         app:anchor_offset_percentage="0.5"
         app:anchor_width="@dimen/popup_layout_anchor_width"
+        app:corner_path_effect="true"
         app:layout_color="#FF6FCB"
         app:layout_corner="@dimen/popup_notify_coins_corner"
         app:layout_gradient_color="#FF547B"
