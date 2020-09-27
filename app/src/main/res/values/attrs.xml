@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="AnchorPopupLayout">
+        <attr name="layout_color" format="color" />
+        <attr name="layout_gradient_color" format="color" />
+        <attr name="layout_gradient_direction" format="enum">
+            <enum name="DOWN" value="0" />
+            <enum name="UP" value="1" />
+            <enum name="LEFT" value="2" />
+            <enum name="RIGHT" value="3" />
+        </attr>
+        <attr name="layout_corner" format="float|reference" />
+        <attr name="anchor_width" format="float|reference" />
+        <attr name="anchor_height" format="float|reference" />
+        <attr name="anchor_direction" format="enum">
+            <enum name="DOWN" value="0" />
+            <enum name="UP" value="1" />
+            <enum name="LEFT" value="2" />
+            <enum name="RIGHT" value="3" />
+        </attr>
+        <attr name="anchor_offset_percentage" format="float" />
+        <attr name="anchor_offset" format="dimension" />
+    </declare-styleable>
+
+</resources>
